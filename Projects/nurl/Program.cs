@@ -1,25 +1,21 @@
-﻿/*
- * Created by SharpDevelop.
- * User: Elisabeth LY
- * Date: 27/05/2014
- * Time: 10:56
- * 
- * To change this template use Tools | Options | Coding | Edit Standard Headers.
- */
+﻿
 using System;
 
 namespace nurl
 {
+	/// <summary>
+	/// Description of Program.
+	/// </summary>	
 	class Program
 	{
 		public static void Main(string[] args)
 		{
-			Console.WriteLine("Hello World!");
+			Nurl nurl = new Nurl();
+			var isCorrect = nurl.isArgsCorrect(args);
 			
-			// TODO: Implement Functionality Here
-			
-			Console.Write("Press any key to continue . . . ");
-			Console.ReadKey(true);
+			if(isCorrect)
+				nurl.routage(args);
 		}
+		
 	}
 }
