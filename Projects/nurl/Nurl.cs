@@ -57,7 +57,7 @@ namespace nurl
 		}
 		
 		public void sortieConsoleContenuWEB (string contenuWEB){
-	 		Console.WriteLine(contenuWEB);
+			Console.WriteLine(contenuWEB);
 		}
 		
 		public string loadindSourceHtmlPage(string url)
@@ -68,7 +68,13 @@ namespace nurl
 			{
 				
 				if(client != null){
-			    	htmlCode = client.DownloadString(url);
+				try{
+					htmlCode = client.DownloadString(url);
+				}catch (Exception e){
+					Console.WriteLine(@"L'application n'arrive pas à joindre le serveur");
+				}
+				
+			    
 				}
 			}
 			return htmlCode;
@@ -105,7 +111,7 @@ namespace nurl
 				if(args[0].Equals("get")){
 					this.Get(args);
 				}else if(args[0].Equals("test")){
-					//this.Test(args);
+					this.Test(args);
 				}
 				
 			}
@@ -150,8 +156,12 @@ namespace nurl
 					System.Diagnostics.Stopwatch timer = new Stopwatch();
 					timer.Start();
 					
+				try{
 					HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-					
+				}catch (Exception e){
+					Console.WriteLine(@"L'application n'arrive pas à joindre le serveur");
+				}
+				
 					timer.Stop();
 					
 					TimeSpan timeTaken = timer.Elapsed;
@@ -161,8 +171,9 @@ namespace nurl
 					Console.WriteLine(@"Passage numéro " + i + " = " + timeTaken.Milliseconds +" ms");
 				}
 				}
-				
+			if(avecMoyenne){
 				Console.WriteLine(@"Moyenne = " + cummule/nb +" ms");
+			}
 		}
 	}
 }

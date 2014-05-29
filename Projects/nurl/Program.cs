@@ -11,11 +11,13 @@ namespace nurl
 		public static void Main(string[] args)
 		{
 			Nurl nurl = new Nurl();
-			var isCorrect = nurl.isArgsCorrect(args);
-			
-			if(isCorrect)
+			if(nurl.isArgsCorrect(args))
 				nurl.routage(args);
+			
+			Console.Write("Press any key to continue . . . ");
+			Console.ReadKey(true);
 		}
-		
+		     
+
 	}
 }
