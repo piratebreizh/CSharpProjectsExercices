@@ -8,9 +8,9 @@ namespace nurl
 	{
 		
 		
-		static String [] argsOkPourGet = {"get","-url","https://www.youtube.com/watch?v=o1tj2zJ2Wvg"};
-		static String [] argsOkPourTest = {"test","-url","https://www.youtube.com/watch?v=o1tj2zJ2Wvg"};
-		
+		static string [] argsOkPourGet = {"get","-url","https://www.youtube.com/watch?v=o1tj2zJ2Wvg"};
+		static string [] argsOkPourTest = {"test","-url","https://www.youtube.com/watch?v=o1tj2zJ2Wvg"};
+		static string file1 = @"c:\folder\myfile.txt";
 		
 		[Test]
 		public void isArgsCorrectTest()
@@ -58,6 +58,22 @@ namespace nurl
 			//then
 			Assert.NotNull(contentHTML);
 		}
+		
+		
+		[Test]
+		public void testisFolderOrFilePath(){
+			//given
+			string path = file1;
+			var nurl = new Nurl();
+			
+			//when
+			var isPath = nurl.isFolderOrFilePath(path);
+			
+			//then
+			Assert.IsTrue(isPath);
+		}
+		
+	
 		
 	}
 }

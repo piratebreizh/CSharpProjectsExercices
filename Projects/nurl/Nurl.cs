@@ -11,10 +11,7 @@ namespace nurl
 	public class Nurl
 	{
 		
-		const int typeGet = 1;
-		const int typeTest = 2;
-		
-		
+
 		public Nurl()	
 		{
 		}
@@ -34,17 +31,39 @@ namespace nurl
 			
 		}
 		
-		
+		/**
+		 * Si nos options lors de l'execution du programme comporte la notion GET en args[0] on rentre dans cette fonction 
+		**/
 		public void Get(string[] args)
 		{
+			var contenuWEB = loadindSourceHtmlPage(args[3]);
+			
 			if(args.Length==5){
-				if(args[3].Equals("-save")){
-					
+				if(args[3].Equals("-save") && isFolderOrFilePath(args[4])){
+					ecritureDansFichierContenuWEB(contenuWEB,args[4]);
 				}
 			}else if (args.Length == 3){
-				
+				sortieConsoleContenuWEB(contenuWEB);
 			}
-			var loadindSourceHtmlPage(args[3]));
+		}
+		
+		
+		public Boolean isFolderOrFilePath(string chemin){
+			
+			Match match = Regex.Match(chemin, @"^(?:[a-zA-Z]\:|\\\\[\w\.]+\\[\w.$]+)\\(?:[\w]+\\)*\w([\w.])+$",RegexOptions.IgnoreCase); 
+			if(match.Success){
+				return true;
+			}else{
+				return false;	
+			}
+		}
+		
+		public void ecritureDansFichierContenuWEB (string contenuWEB,string cheminEnregistrementFichier){
+			System.IO.File.WriteAllText(cheminEnregistrementFichier, contenuWEB);
+		}
+		
+		public void sortieConsoleContenuWEB (string contenuWEB){
+	 		Console.WriteLine(contenuWEB);
 		}
 		
 		public string loadindSourceHtmlPage(string url)
